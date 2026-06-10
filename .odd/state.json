@@ -1,0 +1,43 @@
+{
+  "project": {
+    "name": "Guitar Ear Training App",
+    "description": "Phone-based ear training app for guitar players. Teaches chord families, naming conventions, and intervals using recorded guitar sounds. Designed for beginner-to-intermediate players practising in found time without an instrument in hand.",
+    "directory": "ear-training-app"
+  },
+  "currentPhase": "planning",
+  "currentStage": "personas",
+  "lastSessionDate": "2026-04-15",
+  "nextStep": "Resume Diana on Ruairidh persona — Dimension 2: Reality (whose phone, what moments, how long, headphones, who is watching)",
+  "personas": [
+    {
+      "name": "Ruairidh",
+      "age": 10,
+      "location": "UK",
+      "status": "in-progress",
+      "approved": false,
+      "acidTest": null,
+      "storedInRuflo": false,
+      "dimensionsCaptured": {
+        "identity": {
+          "captured": true,
+          "summary": "10 years old, Year 6 at a small state primary in the UK. Dirty-knees outdoor kid — plays football and other sports. Chose to start guitar himself six months ago. Has private lessons once a week. Likes the idea of being a guitar player more than the work of becoming one — not self-motivated to grind out practice."
+        },
+        "reality": { "captured": false },
+        "psychology": { "captured": false },
+        "trigger": { "captured": false },
+        "history": { "captured": false },
+        "success": { "captured": false },
+        "constraints": { "captured": false }
+      }
+    }
+  ],
+  "outcomes": [],
+  "contractsMapped": false,
+  "planApproved": false,
+  "techStackDecided": false,
+  "designApproachDecided": false,
+  "architectureDocGenerated": false,
+  "servicesConfigured": false,
+  "briefConfirmed": false,
+  "sessionBriefCount": 0
+}
