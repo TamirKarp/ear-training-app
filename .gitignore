@@ -1,5 +1,6 @@
 # Runtime cruft
 .swarm/
+ruvector.db
 .DS_Store
 
 # Node

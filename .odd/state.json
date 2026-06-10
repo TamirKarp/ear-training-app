@@ -1,37 +1,68 @@
 {
   "project": {
     "name": "Guitar Ear Training App",
-    "description": "Phone-based ear training app for guitar players. Teaches chord families, naming conventions, and intervals using recorded guitar sounds. Designed for beginner-to-intermediate players practising in found time without an instrument in hand.",
+    "description": "Phone-based ear training app for guitar players. Teaches chord families, naming conventions, and intervals using recorded guitar sounds. All-ages product, kid-friendly — Ruairidh (10) represents the youngest demanding user the app must serve, not the target audience. Designed for beginner-to-intermediate players practising in found time without an instrument in hand.",
     "directory": "ear-training-app"
   },
   "currentPhase": "planning",
-  "currentStage": "personas",
-  "lastSessionDate": "2026-04-15",
-  "nextStep": "Resume Diana on Ruairidh persona — Dimension 2: Reality (whose phone, what moments, how long, headphones, who is watching)",
+  "currentStage": "outcomes",
+  "lastSessionDate": "2026-06-10",
+  "nextStep": "Continue with Marcus on the next outcome. Likely candidates: (1) Start a Practice session on a known module — handles cold start to first question, Outcome 1's Field 2 trigger comes from this. (2) Complete a Test on a known module — applies the Test-mode rules logged in Outcome 1's forward notes. Marcus to pick.",
   "personas": [
     {
       "name": "Ruairidh",
       "age": 10,
       "location": "UK",
-      "status": "in-progress",
-      "approved": false,
-      "acidTest": null,
-      "storedInRuflo": false,
+      "status": "approved",
+      "approved": true,
+      "acidTest": true,
+      "storedInRuflo": true,
+      "documentPath": "docs/personas/ruairidh.md",
+      "approvedDate": "2026-05-14",
       "dimensionsCaptured": {
-        "identity": {
-          "captured": true,
-          "summary": "10 years old, Year 6 at a small state primary in the UK. Dirty-knees outdoor kid — plays football and other sports. Chose to start guitar himself six months ago. Has private lessons once a week. Likes the idea of being a guitar player more than the work of becoming one — not self-motivated to grind out practice."
-        },
-        "reality": { "captured": false },
-        "psychology": { "captured": false },
-        "trigger": { "captured": false },
-        "history": { "captured": false },
-        "success": { "captured": false },
-        "constraints": { "captured": false }
+        "identity": { "captured": true },
+        "reality": { "captured": true },
+        "psychology": { "captured": true },
+        "trigger": { "captured": true },
+        "history": { "captured": true },
+        "success": { "captured": true },
+        "constraints": { "captured": true }
       }
     }
   ],
-  "outcomes": [],
+  "outcomes": [
+    {
+      "name": "Answer one Practice question",
+      "slug": "answer-one-practice-question",
+      "number": 1,
+      "persona": "Ruairidh",
+      "documentPath": "docs/outcomes/answer-one-practice-question.md",
+      "approved": true,
+      "approvedDate": "2026-06-10",
+      "buildStatus": "not started",
+      "storedInRuflo": true,
+      "fourTrapReview": {
+        "vagueness": "passed",
+        "technicalLanguage": "passed",
+        "happyPathOnly": "passed",
+        "kitchenSink": "passed"
+      },
+      "contractsExposed": [
+        "Practice question completed signal — carries timestamp + module identity. Consumed by streak advancement, session activity counter.",
+        "Ready-for-next-Practice-question trigger — consumed by next instance of this outcome."
+      ],
+      "dependencies": [
+        "Active Practice session on a specific module (from Practice Session outcome — not yet written)",
+        "Module question bank loaded (from Module Loading outcome — not yet written)",
+        "Audio playback system functional (infrastructure)",
+        "Current question selected and queued (from Practice Session outcome)"
+      ],
+      "forwardNotes": {
+        "testModeRules": "Binary (2 options) → 1 attempt; non-binary (3+ options) → 2 attempts; correct answer revealed after attempts spent. Test is timed; no pause button (would let users cheat leaderboard).",
+        "sameQuestionOnResume": "Practice Session outcome must persist current question + wrong-tap state on interruption; on resume same question reloads with red buttons preserved."
+      }
+    }
+  ],
   "contractsMapped": false,
   "planApproved": false,
   "techStackDecided": false,
