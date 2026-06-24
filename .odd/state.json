@@ -6,8 +6,14 @@
   },
   "currentPhase": "planning",
   "currentStage": "outcomes",
-  "lastSessionDate": "2026-06-10",
-  "nextStep": "Continue with Marcus on the next outcome. Likely candidates: (1) Start a Practice session on a known module — handles cold start to first question, Outcome 1's Field 2 trigger comes from this. (2) Complete a Test on a known module — applies the Test-mode rules logged in Outcome 1's forward notes. Marcus to pick.",
+  "lastSessionDate": "2026-06-24",
+  "nextStep": "Continue with Marcus on the next outcome. Strong candidate: Complete a Test on a known element — applies the Test-mode rules logged in Outcome 1 (binary = 1 attempt, 3+ = 2 attempts, timed, no pause, leaderboard impact) and the Test-continue behaviour flagged in Outcome 2. Other candidates: session-save outcome (produces the resume state both Outcome 1 and 2 depend on), profile-creation/onboarding outcome.",
+  "taxonomy": {
+    "module": "Large category — Intervals, Chords, Chord Sequences",
+    "element": "Specific exercise within a module — e.g. Intervals > Major & Minor 2nds, Major & Minor 3rds, Melodic vs Harmonic. The question bank, Practice, Test, and best scores all live at the element level.",
+    "scoresLocation": "Module page, per element. Never on the home screen.",
+    "openContentQuestion": "How finely Intervals subdivides into elements, and whether ascending/descending/mixed and melodic/harmonic are separate elements or options within an element. Parked — content design, not blocking."
+  },
   "personas": [
     {
       "name": "Ruairidh",
@@ -47,19 +53,51 @@
         "happyPathOnly": "passed",
         "kitchenSink": "passed"
       },
+      "note": "Terminology reconciled 2026-06-24: leaf-level 'module' changed to 'element' throughout; references to the persistence owner renamed to 'session-save outcome'; dependency on Outcome 2 named explicitly.",
       "contractsExposed": [
-        "Practice question completed signal — carries timestamp + module identity. Consumed by streak advancement, session activity counter.",
+        "Practice question completed signal — carries timestamp + element identity. Consumed by streak advancement, session activity counter.",
         "Ready-for-next-Practice-question trigger — consumed by next instance of this outcome."
       ],
       "dependencies": [
-        "Active Practice session on a specific module (from Practice Session outcome — not yet written)",
-        "Module question bank loaded (from Module Loading outcome — not yet written)",
+        "Active Practice session on a specific element (from Outcome 2 — Start a Practice session)",
+        "Element question bank loaded (from content-loading outcome — not yet written)",
         "Audio playback system functional (infrastructure)",
-        "Current question selected and queued (from Practice Session outcome)"
+        "Current question selected and queued (from Outcome 2)"
+      ]
+    },
+    {
+      "name": "Start a Practice session on a known module",
+      "slug": "start-a-practice-session",
+      "number": 2,
+      "persona": "Ruairidh",
+      "documentPath": "docs/outcomes/start-a-practice-session.md",
+      "approved": true,
+      "approvedDate": "2026-06-24",
+      "buildStatus": "not started",
+      "storedInRuflo": true,
+      "fourTrapReview": {
+        "vagueness": "passed",
+        "technicalLanguage": "passed",
+        "happyPathOnly": "passed",
+        "kitchenSink": "passed"
+      },
+      "scope": "Full journey: app-open → profile picker → home (streak + Continue + module list) → either Continue (hot path, 2 taps) or browse (module page → element's inline Practice). Ends when first question audio plays. Excludes profile creation, new-element video lesson, session save/end, and the Test fork.",
+      "contractsExposed": [
+        "Active Practice session on a specific element, first question queued — consumed by Outcome 1.",
+        "Active profile — whose data is in scope; consumed by nearly every outcome.",
+        "Navigation surfaces: profile picker, home screen, module page with per-element best scores + Practice/Test fork — consumed by Test, leaderboard, streak-display, badge/dashboard outcomes."
+      ],
+      "dependencies": [
+        "Ruairidh's profile exists (profile-creation/onboarding outcome — not yet written)",
+        "Module/element taxonomy and content exist (content-loading outcome — not yet written)",
+        "Best Test scores per element (Test outcome — graceful 'not attempted' if absent)",
+        "Persisted last-activity + interrupted-question state (session-save outcome — Continue starts fresh if absent)",
+        "Streak value (streak outcome — shows zero if absent)"
       ],
       "forwardNotes": {
-        "testModeRules": "Binary (2 options) → 1 attempt; non-binary (3+ options) → 2 attempts; correct answer revealed after attempts spent. Test is timed; no pause button (would let users cheat leaderboard).",
-        "sameQuestionOnResume": "Practice Session outcome must persist current question + wrong-tap state on interruption; on resume same question reloads with red buttons preserved."
+        "testContinueBehaviour": "Continue button is shared; its Test-mode behaviour (tests do not resume) must be specified by the Test outcome.",
+        "modulePageDensity": "Element rows carry name + best % + best time + Practice + Test — dense on 375px; Rachel's layout concern.",
+        "profileCreation": "Username choice (no password) + first-use flow are separate onboarding outcomes."
       }
     }
   ],
